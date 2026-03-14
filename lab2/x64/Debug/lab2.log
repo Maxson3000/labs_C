@@ -1,0 +1,3 @@
+﻿  lab2.c
+C:\Users\Anonim\OneDrive\Desktop\лабы учебные\lab2\lab2.c(17,11): warning C4244: =: преобразование "double" в "int", возможна потеря данных
+  lab2.vcxproj -> C:\Users\Anonim\OneDrive\Desktop\лабы учебные\lab1\x64\Debug\lab2.exe
