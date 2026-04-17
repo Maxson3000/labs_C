@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <ctype.h>
 
 int main() {
     char expr[256];
@@ -37,7 +36,7 @@ int main() {
             continue;
         }
 
-        if (isdigit(expr[i])) {
+        if (expr[i] >= '0' && expr[i] <= '9') {
             int digit = expr[i] - '0';
 
             if (!has_dot) {
