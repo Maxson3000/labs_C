@@ -6,12 +6,12 @@ int main() {
     printf("Введите выражение: ");
     fgets(expr, sizeof(expr), stdin);
 
-    double result = 0.0;   // итоговый результат
-    double current = 0.0;  // текущее число
-    char op = '+';         // текущий оператор, по умолчанию +
-    int i = 0;             // индекс в строке
-    int has_dot = 0;       // флаг: встретили точку?
-    double dot_div = 1.0;  // делитель для дробной части
+    double result = 0.0;
+    double current = 0.0;
+    char op = '+';
+    int i = 0;
+    int has_dot = 0;
+    double dot_div = 1.0;
 
     while (expr[i] != '\0' && expr[i] != '\n') {
         if (expr[i] == ' ') {
@@ -19,13 +19,10 @@ int main() {
             continue;
         }
 
-        // Если встретили оператор
         if (expr[i] == '+' || expr[i] == '-') {
-            // Применяем предыдущий оператор к накопленному числу
             if (op == '+') result += current;
-            else          result -= current;
+            else result -= current;
 
-            // Запоминаем новый оператор и сбрасываем число
             op = expr[i];
             current = 0.0;
             has_dot = 0;
@@ -34,22 +31,18 @@ int main() {
             continue;
         }
 
-        // Если встретили точку
         if (expr[i] == '.') {
             has_dot = 1;
             i++;
             continue;
         }
 
-        // Если цифра
         if (isdigit(expr[i])) {
             int digit = expr[i] - '0';
 
             if (!has_dot) {
-                // Целая часть
                 current = current * 10.0 + digit;
             } else {
-                // Дробная часть
                 dot_div *= 10.0;
                 current = current + (double)digit / dot_div;
             }
@@ -57,13 +50,11 @@ int main() {
             continue;
         }
 
-        // Неизвестный символ — пропускаем
         i++;
     }
 
-    // Применяем последний оператор к последнему числу
     if (op == '+') result += current;
-    else          result -= current;
+    else result -= current;
 
     printf("Результат: %g\n", result);
     return 0;
