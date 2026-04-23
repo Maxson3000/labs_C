@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdio.h>
+
+#define MAX(numlist, n, maxnum) \
+    {                           \
+        maxnum = numlist[0];    \
+        for (int i = 1; i < n; i++) { \
+            if (maxnum < numlist[i]) { \
+                maxnum = numlist[i];   \
+            }                     \
+        }                        \
+    }
+
+int main() {
+    int n;
+    int maxnum;
+    printf("Vvedite kol-vo chisel: ");
+    scanf("%d", &n);
+    int numlist[n];
+    printf("Vvedite chisla massiva: ");
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &numlist[i]);
+    }   
+    MAX(numlist, n, maxnum);   
+    printf("Maksimalnoe chislo massiva: %d\n", maxnum);
+    return 0;
+}
