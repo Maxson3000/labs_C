@@ -1,10 +1,6 @@
 #include <stdio.h>
 
-int main() {
-    char expr[256];
-    printf("Введите выражение: ");
-    fgets(expr, sizeof(expr), stdin);
-
+double calc(const char *expr) {
     double result = 0.0;
     double current = 0.0;
     char op = '+';
@@ -13,15 +9,9 @@ int main() {
     double dot_div = 1.0;
 
     while (expr[i] != '\0' && expr[i] != '\n') {
-        if (expr[i] == ' ') {
-            i++;
-            continue;
-        }
-
         if (expr[i] == '+' || expr[i] == '-') {
             if (op == '+') result += current;
             else result -= current;
-
             op = expr[i];
             current = 0.0;
             has_dot = 0;
@@ -29,16 +19,13 @@ int main() {
             i++;
             continue;
         }
-
         if (expr[i] == '.') {
             has_dot = 1;
             i++;
             continue;
         }
-
         if (expr[i] >= '0' && expr[i] <= '9') {
             int digit = expr[i] - '0';
-
             if (!has_dot) {
                 current = current * 10.0 + digit;
             } else {
@@ -48,13 +35,18 @@ int main() {
             i++;
             continue;
         }
-
         i++;
     }
-
     if (op == '+') result += current;
     else result -= current;
+    return result;
+}
 
-    printf("Результат: %g\n", result);
+int main() {
+    char expr[256];
+    printf("Введите выражение: ");
+    fgets(expr, sizeof(expr), stdin);
+    double result = calc(expr);
+    printf("Результат: %g", result);
     return 0;
 }
